@@ -23,7 +23,7 @@ function GameObject(attr){
 }
 
 GameObject.prototype.destroy = function() {
-  console.log(`${this.name} was removed from the game.`)
+  return `${this.name} was removed from the game.`;
 };
 
 /*
@@ -33,13 +33,13 @@ GameObject.prototype.destroy = function() {
   * should inherit destroy() from GameObject's prototype
 */
 function CharacterStats(stats){
+  this.healthPoints = stats.healthPoints;
   GameObject.call(this, stats);
-  this.healthPointse = stats.healthPoints;
 }
 CharacterStats.prototype = Object.create(GameObject.prototype);
 CharacterStats.prototype.takeDamage = function() {
-  console.log(`${this.name} took damange.`)
-};
+  return `${this.name} took damange.`;
+}
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -50,16 +50,16 @@ CharacterStats.prototype.takeDamage = function() {
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
- function Humanoid (humanoidAttr) {
-   CharacterStats.call(this, humanoidAttr);
+ function Humanoid(humanoidAttr) {
    this.team = humanoidAttr.team;
    this.weapons = humanoidAttr.weapons;
    this.language = humanoidAttr.language;
+   CharacterStats.call(this, humanoidAttr);
  }
  Humanoid.prototype = Object.create(CharacterStats.prototype);
  Humanoid.prototype.greet = function(){
-   console.log(`${this.name} offers a greeting in ${this.language}.`);
- };
+   return `${this.name} offers a greeting in ${this.language}.`;
+ }
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
@@ -135,3 +135,14 @@ CharacterStats.prototype.takeDamage = function() {
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  
+  console.log("---------------------------------------STRETCH--------------------------------------------");
+
+  function Hero(heroAttr) {
+    
+    Humanoid.call(this, heroAttr);
+  }
+
+  function Villain(villainAttr) {
+    Humanoid.call(this, villainAttr);
+  }
