@@ -14,6 +14,7 @@ console.log("-------------------THIS-------------------------")
 
 function heeeresWindow() {
   console.log(this);
+  //without context to reference to, this points to the window itself.
 }
 
 heeeresWindow();
@@ -24,6 +25,7 @@ const hiHoney = {
   greeting: `, I'm hoooome!`,
   welcomeHome: function(name) {
     console.log(`${name}${this.greeting}`);
+    //this refers to the context inside of the object.
   }
 };
 
@@ -37,6 +39,7 @@ function Student(name, major, gradClass) {
   this.gradClass = gradClass;
   this.studentProfile = function() {
     console.log(`${this.name} is a major in ${this.major}, set to graduate in ${this.gradClass}.`);
+    //this isn't defined until the new object is constructed below...then it refers to that object.
   };
 }
 
@@ -52,9 +55,9 @@ senior.studentProfile();
 
 // Principle 4
 
-//(using the above code)
 console.log("------------");
 freshman.studentProfile.call(senior);
 junior.studentProfile.call(senior);
 freshman.studentProfile.call(sophomore);
+//this (still in the context of the constructor function above) is explicitly defined by the object specified in the parameters.
 
