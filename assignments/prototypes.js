@@ -139,10 +139,52 @@ CharacterStats.prototype.takeDamage = function() {
   console.log("---------------------------------------STRETCH--------------------------------------------");
 
   function Hero(heroAttr) {
-    
     Humanoid.call(this, heroAttr);
+  }
+  Hero.prototype = Object.create(humanoidAttr.prototype);
+  Hero.prototype.battleCry = function(){
+    return `${this.name} give a mighty battle cry in ${this.language}!`;
   }
 
   function Villain(villainAttr) {
-    Humanoid.call(this, villainAttr);
+    Humanoid.call(this, villainAttr);  
   }
+  Villain.prototype = Object.create(humanoidAttr.prototype);
+  Villain.prototype.battleCry = function() {
+    return `${this.name} gives an monsterous battle cry in ${this.language}!`;
+  }
+
+  let superNan = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 2,
+      width: 3,
+      height: 6,
+    },
+    healthPoints: 20,
+    name: 'Super Nanny',
+    team: 'Better Behavior Brigade',
+    weapons: [
+      'Book of Discipline',
+      'Time Out Token'
+    ],
+    language: `The Queen's English`
+  });
+
+  const terrTwo = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 0.5,
+      width: 1,
+      height: 1,
+    },
+    healthPoints: 30,
+    name: 'Terrible Two Timmy',
+    team: 'No-Nappers',
+    weapons: [
+      'Death Rattle',
+      'Sonic Tantrum Blast',
+      'Binky Boomerang'
+    ],
+    language: 'Baby Talk',
+  });
