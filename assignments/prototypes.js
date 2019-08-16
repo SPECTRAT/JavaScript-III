@@ -148,10 +148,10 @@ CharacterStats.prototype.takeDamage = function(num) {
   }
   Hero.prototype.clobber = function(weapon, opponent) {
     return `${this.name} used  ${weapon} to clobber ${opponent}.`
-  };
+  }
   Hero.prototype.mega = function(megaMove, opponent) {
     return `${this.name} used special move, ${megaMove}, on ${opponent}!`
-  };
+  }
   Hero.prototype.healing = function(){
     return `${this.name} healed themselves for 10 HP.`
   }
@@ -166,7 +166,7 @@ CharacterStats.prototype.takeDamage = function(num) {
     return `${this.name} gives an monsterous battle cry in ${this.language}!`;
   }
   Villain.prototype.smash = function(weapon, opponent) {
-    return `${this.name} used  ${weapon} to smash ${opponent}.`
+    return `${this.name} used  ${weapon} to smash ${opponent}.`;
   };
   Hero.prototype.mega = function(megaMove, opponent) {
     return `${this.name} used special move, ${megaMove}, on ${opponent}!`
