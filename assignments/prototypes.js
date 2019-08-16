@@ -23,7 +23,7 @@ function GameObject(attr){
 }
 
 GameObject.prototype.destroy = function() {
-  return `${this.name} was removed from the game.`;
+  return `${this.name} was removed from the game!`;
 };
 
 /*
@@ -37,8 +37,8 @@ function CharacterStats(stats){
   GameObject.call(this, stats);
 }
 CharacterStats.prototype = Object.create(GameObject.prototype);
-CharacterStats.prototype.takeDamage = function() {
-  return `${this.name} took damange.`;
+CharacterStats.prototype.takeDamage = function(num) {
+  return `${this.name} took ${num} damange.`;
 }
 
 /*
@@ -127,7 +127,7 @@ CharacterStats.prototype.takeDamage = function() {
   console.log(mage.weapons); // Staff of Shamalama
   console.log(archer.language); // Elvish
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
-  console.log(mage.takeDamage()); // Bruce took damage.
+  console.log(mage.takeDamage(5)); // Bruce took 5 damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 
@@ -140,19 +140,37 @@ CharacterStats.prototype.takeDamage = function() {
 
   function Hero(heroAttr) {
     Humanoid.call(this, heroAttr);
+    this.megaMove = heroAttr.megaMove;
   }
-  Hero.prototype = Object.create(humanoidAttr.prototype);
+  Hero.prototype = Object.create(Humanoid.prototype);
   Hero.prototype.battleCry = function(){
     return `${this.name} give a mighty battle cry in ${this.language}!`;
   }
+  Hero.prototype.clobber = function(weapon, opponent) {
+    return `${this.name} used  ${weapon} to clobber ${opponent}.`
+  };
+  Hero.prototype.mega = function(megaMove, opponent) {
+    return `${this.name} used ${megaMove} on ${opponent}!`
+  };
+  Hero.prototype.healing = function(){
+    return `${this.name} healed themselves for 10 HP.`
+  }
+
 
   function Villain(villainAttr) {
     Humanoid.call(this, villainAttr);  
+    this.megaMove = villainAttr.megaMove;
   }
-  Villain.prototype = Object.create(humanoidAttr.prototype);
+  Villain.prototype = Object.create(Humanoid.prototype);
   Villain.prototype.battleCry = function() {
     return `${this.name} gives an monsterous battle cry in ${this.language}!`;
   }
+  Villain.prototype.smash = function(weapon, opponent) {
+    return `${this.name} used  ${weapon} to smash ${opponent}.`
+  };
+  Hero.prototype.mega = function(megaMove, opponent) {
+    return `${this.name} used ${megaMove} on ${opponent}!`
+  };
 
   let superNan = new Hero({
     createdAt: new Date(),
@@ -161,14 +179,15 @@ CharacterStats.prototype.takeDamage = function() {
       width: 3,
       height: 6,
     },
-    healthPoints: 20,
+    healthPoints: 25,
     name: 'Super Nanny',
     team: 'Better Behavior Brigade',
     weapons: [
       'Book of Discipline',
       'Time Out Token'
     ],
-    language: `The Queen's English`
+    language: `The Queen's English`,
+    megaMove : "A Firm Talking To"
   });
 
   const terrTwo = new Villain({
@@ -187,4 +206,31 @@ CharacterStats.prototype.takeDamage = function() {
       'Binky Boomerang'
     ],
     language: 'Baby Talk',
+    megaMove: 'Turbo Tantrum'
   });
+
+  console.log(terrTwo.battleCry());
+  console.log("...");
+  console.log(superNan.battleCry());
+  console.log("...");
+  console.log(superNan.clobber(superNan.weapons[0], terrTwo.name));
+  console.log(terrTwo.takeDamage(10));
+  console.log("...");
+  console.log(terrTwo.smash(terrTwo.weapons[1], superNan.name));
+  console.log(superNan.takeDamage(10));
+  console.log("...");
+  console.log(superNan.clobber(superNan.weapons[1], terrTwo.name));
+  console.log(terrTwo.takeDamage(10));
+  console.log("...");
+  console.log(terrTwo.smash(terrTwo.weapons[0], superNan.name));
+  console.log(superNan.takeDamage(7));
+  console.log("...");
+  console.log(superNan.healing());
+  console.log("...");
+  console.log(terrTwo.smash(terrTwo.weapons[0], superNan.name));
+  console.log(superNan.takeDamage(10));
+  console.log("...");
+  console.log(superNan.mega(superNan.megaMove));
+  console.log(terrTwo.takeDamage(15));
+  console.log(terrTwo.destroy());
+  
