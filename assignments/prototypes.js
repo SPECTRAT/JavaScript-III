@@ -169,7 +169,7 @@ CharacterStats.prototype.takeDamage = function(num) {
     return `${this.name} used  ${weapon} to smash ${opponent}.`;
   };
   Hero.prototype.mega = function(megaMove, opponent) {
-    return `${this.name} used special move, ${megaMove}, on ${opponent}!`
+    return `${this.name} used special move, ${megaMove}, on ${opponent.name}!`
   };
 
   let superNan = new Hero({
@@ -230,7 +230,7 @@ CharacterStats.prototype.takeDamage = function(num) {
   console.log(terrTwo.smash(terrTwo.weapons[0], superNan.name));
   console.log(superNan.takeDamage(10));
   console.log("...");
-  console.log(superNan.mega(superNan.megaMove));
+  console.log(superNan.mega(superNan.megaMove, terrTwo));
   console.log(terrTwo.takeDamage(15));
   console.log(terrTwo.destroy());
   console.log(`${superNan.name} is the victor!!`);
